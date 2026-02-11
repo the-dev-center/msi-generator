@@ -1,0 +1,7 @@
+{
+	"name": "cfb-d",
+	"description": "Pure D implementation of OLE2 Compound File Binary (CFB) format.",
+	"authors": ["The Dev Center"],
+	"license": "MIT",
+	"targetType": "library"
+}

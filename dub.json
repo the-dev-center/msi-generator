@@ -5,6 +5,8 @@
 	"license": "MIT",
 	"targetType": "executable",
 	"dependencies": {
-		"arsd-official:dom": "~>11.0.0"
+		"cfb-d": {"path": "./libs/cfb-d"},
+		"cab-d": {"path": "./libs/cab-d"},
+		"msidb-d": {"path": "./libs/msidb-d"}
 	}
 }

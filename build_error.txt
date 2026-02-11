@@ -1,0 +1,16 @@
+    Starting Performing "debug" build using C:\D\dmd2\windows\bin64\dmd.exe for x86_64.
+  Up-to-date cab-d ~master: target for configuration [library] is up to date.
+  Up-to-date cfb-d ~master: target for configuration [library] is up to date.
+  Up-to-date msidb-d ~master: target for configuration [library] is up to date.
+    Building msi-generator ~master: building configuration [application]
+source\app.d(16,54): Error: identifier or `new` expected following `.`, not `version`
+        "version|v", "Version (e.g. 1.0.0.0)", &info.version,
+                                                     ^
+source\msigen\common.d(6,12): Error: variable name expected after type `string`, not `version`
+    string version;
+           ^
+source\msigen\common.d(6,12):        `version` is a keyword, perhaps append `_` to make it an identifier
+source\msigen\msix.d(56,27): Error: identifier or `new` expected following `.`, not `version`
+</Package>`(info.id, info.version, info.publisher, info.name, info.publisher, info.executablePath.baseName, info.name, info.description);
+                          ^
+Error C:\D\dmd2\windows\bin64\dmd.exe failed with exit code 1.

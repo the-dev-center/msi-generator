@@ -3,7 +3,7 @@ module msigen.common;
 struct PackageInfo {
     string name;
     string id;
-    string version;
+    string pkgVersion;
     string publisher;
     string description;
     string executablePath;

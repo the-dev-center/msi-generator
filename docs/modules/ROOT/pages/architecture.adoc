@@ -1,0 +1,34 @@
+= Architecture: Decoupling MSI from WiX
+
+The primary goal of this project is to decouple the MSI generation process from the Windows-only WiX toolchain. 
+
+== The Specification Gap
+
+Currently, most cross-platform tools (CPack, Tauri, etc.) generate WiX XML (`.wxs`) and then call WiX binaries (`candle.exe`, `light.exe`) to produce the final MSI. This creates a hard dependency on Windows (and .NET) for the build process.
+
+We bridge this gap by defining a **Universal Product Specification** and implementing the low-level binary formats natively in D.
+
+== Binary Decoupling Layers
+
+To generate an MSI without WiX, we implement the following layers:
+
+[cols="1,3"]
+|===
+| Layer | Description
+
+| **Spec API**
+| A high-level D-lang API (`msigen.spec`) that describes the installer's content (files, registry, folders) in a tool-agnostic way.
+
+| **MSI Database Logic**
+| Maps the high-level Spec to the relational table structure of Windows Installer (`libs/msidb-d`). This includes generating the `_StringPool` and `_StringData` streams.
+
+| **CFB (OLE2) Writer**
+| A pure D implementation of the OLE2 Compound File Binary format (`libs/cfb-d`). MSI files are OLE containers.
+
+| **CAB (Cabinet) Writer**
+| A pure D implementation of the Microsoft Cabinet format (`libs/cab-d`), used for compressed file storage within MSI.
+|===
+
+== MSIX Advantage
+
+MSIX is naturally more decoupled as it uses the Open Packaging Conventions (ZIP + XML). Our MSIX generator uses standard D libraries for ZIP compression and XML generation, making it fully cross-platform by default.

@@ -13,7 +13,7 @@ void main(string[] args) {
         args,
         "name|n", "Name of the package", &info.name,
         "id|i", "Identity/AppID of the package", &info.id,
-        "version|v", "Version (e.g. 1.0.0.0)", &info.version,
+        "version|v", "Version (e.g. 1.0.0.0)", &info.pkgVersion,
         "publisher|p", "Publisher string", &info.publisher,
         "desc|d", "Description", &info.description,
         "exe|e", "Path to executable", &info.executablePath,

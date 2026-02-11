@@ -1,0 +1,11 @@
+{
+	"name": "msidb-d",
+	"description": "Pure D implementation of Windows Installer (MSI) database logic.",
+	"authors": ["The Dev Center"],
+	"license": "MIT",
+	"targetType": "library",
+	"dependencies": {
+		"cfb-d": {"path": "../cfb-d"},
+		"cab-d": {"path": "../cab-d"}
+	}
+}

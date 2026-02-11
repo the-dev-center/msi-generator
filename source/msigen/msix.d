@@ -4,7 +4,6 @@ import msigen.common;
 import std.zip;
 import std.file;
 import std.path;
-import arsd.dom;
 import std.format;
 
 class MsixGenerator : PackageGenerator {
@@ -54,6 +53,6 @@ class MsixGenerator : PackageGenerator {
       </uap:VisualElements>
     </Application>
   </Applications>
-</Package>`(info.id, info.version, info.publisher, info.name, info.publisher, info.executablePath.baseName, info.name, info.description);
+</Package>`(info.id, info.pkgVersion, info.publisher, info.name, info.publisher, info.executablePath.baseName, info.name, info.description);
     }
 }

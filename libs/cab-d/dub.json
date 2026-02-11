@@ -1,0 +1,7 @@
+{
+	"name": "cab-d",
+	"description": "Pure D implementation of Microsoft Cabinet (CAB) format.",
+	"authors": ["The Dev Center"],
+	"license": "MIT",
+	"targetType": "library"
+}

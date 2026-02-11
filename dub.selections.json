@@ -1,0 +1,9 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"arsd-official": "11.0.1",
+		"cab-d": {"path":"libs/cab-d"},
+		"cfb-d": {"path":"libs/cfb-d"},
+		"msidb-d": {"path":"libs/msidb-d"}
+	}
+}
