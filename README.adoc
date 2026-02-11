@@ -1,0 +1,5 @@
+= MSI/MSIX Generator
+:description: A cross-platform MSI/MSIX generator in D-lang
+
+This project aim to replace WiX in CPack (CMake) by providing a pure D implementation for generating Windows Installer (MSI) and MSIX packages without depending on Windows-only binaries.
+

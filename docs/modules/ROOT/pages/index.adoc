@@ -1,0 +1,4 @@
+= MSI/MSIX Generator
+
+Welcome to the MSI/MSIX Generator documentation.
+

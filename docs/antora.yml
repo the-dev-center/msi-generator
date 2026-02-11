@@ -1,0 +1,7 @@
+name: msi-generator
+title: MSI/MSIX Generator
+version: master
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc
+

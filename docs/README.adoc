@@ -1,0 +1,4 @@
+= MSI/MSIX Generator Documentation
+
+This directory contains the Antora documentation for the MSI/MSIX Generator project.
+
