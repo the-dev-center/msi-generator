@@ -1,0 +1,36 @@
+name: 'MSI/MSIX Generator'
+description: 'Cross-platform MSI and MSIX package generation using msi-generator'
+inputs:
+  spec:
+    description: 'Path to the msi.json specification file'
+    required: true
+  output:
+    description: 'Output filename (e.g., myapp.msi)'
+    required: true
+  type:
+    description: 'Package type (msi or msix)'
+    default: 'msi'
+  version:
+    description: 'Version of msi-generator to use'
+    default: 'latest'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Download msi-generator
+      shell: bash
+      run: |
+        # Download logic based on OS
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+          URL="https://github.com/the-dev-center/msi-generator/releases/download/${{ inputs.version }}/msi-generator-linux"
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+          URL="https://github.com/the-dev-center/msi-generator/releases/download/${{ inputs.version }}/msi-generator-macos"
+        else
+          URL="https://github.com/the-dev-center/msi-generator/releases/download/${{ inputs.version }}/msi-generator.exe"
+        fi
+        curl -L -o msi-generator $URL
+        chmod +x msi-generator
+
+    - name: Run msi-generator
+      shell: bash
+      run: ./msi-generator --spec ${{ inputs.spec }} --output ${{ inputs.output }} --type ${{ inputs.type }}

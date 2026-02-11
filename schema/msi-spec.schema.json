@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MSI/MSIX Product Specification",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "manufacturer": { "type": "string" },
+    "productVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "productCode": { "type": "string", "format": "uuid" },
+    "upgradeCode": { "type": "string", "format": "uuid" },
+    "rootFolder": { "$ref": "#/definitions/folder" },
+    "components": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/component" }
+    },
+    "features": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/feature" }
+    }
+  },
+  "required": ["name", "manufacturer", "productVersion"],
+  "definitions": {
+    "folder": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "parentId": { "type": "string" },
+        "subfolders": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/folder" }
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "file": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sourcePath": { "type": "string" },
+        "targetName": { "type": "string" }
+      },
+      "required": ["id", "sourcePath"]
+    },
+    "registry": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "root": { "enum": ["ClassesRoot", "CurrentUser", "LocalMachine", "Users"] },
+        "key": { "type": "string" },
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "required": ["id", "root", "key"]
+    },
+    "component": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "guid": { "type": "string", "format": "uuid" },
+        "directoryId": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/file" }
+        },
+        "registryEntries": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/registry" }
+        }
+      },
+      "required": ["id", "guid", "directoryId"]
+    },
+    "feature": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "level": { "type": "integer", "default": 1 },
+        "componentIds": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["id", "title"]
+    }
+  }
+}

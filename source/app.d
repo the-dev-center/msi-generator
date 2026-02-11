@@ -1,13 +1,19 @@
 import std.stdio;
+import std.getopt;
+import std.file : readText;
+import asdf;
+
+import msidb.spec;
+import msidb.writer;
 import msigen.common;
 import msigen.msix;
 import msigen.msi;
-import std.getopt;
 
 void main(string[] args) {
     PackageInfo info;
     string type = "msix";
     string output;
+    string specPath;
 
     auto helpInformation = getopt(
         args,
@@ -18,11 +24,30 @@ void main(string[] args) {
         "desc|d", "Description", &info.description,
         "exe|e", "Path to executable", &info.executablePath,
         "type|t", "Package type (msi or msix)", &type,
-        "output|o", "Output path", &output
+        "output|o", "Output path", &output,
+        "spec|s", "Path to JSON specification file", &specPath
     );
 
-    if (helpInformation.helpWanted || output is null) {
+    if (helpInformation.helpWanted || (output is null && specPath is null)) {
         defaultGetoptPrinter("MSI/MSIX Generator", helpInformation.options);
+        return;
+    }
+
+    if (specPath !is null) {
+        auto specText = readText(specPath);
+        auto productSpec = specText.deserialize!ProductSpec;
+        
+        if (type == "msi") {
+            auto db = new MsiDatabase(productSpec);
+            db.save(output);
+        } else {
+            PackageInfo pinfo;
+            pinfo.name = productSpec.name;
+            pinfo.pkgVersion = productSpec.productVersion;
+            pinfo.publisher = productSpec.manufacturer;
+            auto gen = new MsixGenerator();
+            gen.generate(pinfo, output);
+        }
         return;
     }
 
@@ -30,7 +55,8 @@ void main(string[] args) {
     if (type == "msix") {
         gen = new MsixGenerator();
     } else if (type == "msi") {
-        gen = new MsiGenerator();
+        writeln("MSI generation via CLI flags is limited. Use --spec.");
+        return;
     } else {
         writeln("Unknown type: ", type);
         return;

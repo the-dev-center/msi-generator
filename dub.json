@@ -7,6 +7,19 @@
 	"dependencies": {
 		"cfb-d": {"path": "./libs/cfb-d"},
 		"cab-d": {"path": "./libs/cab-d"},
-		"msidb-d": {"path": "./libs/msidb-d"}
-	}
+		"msidb-d": {"path": "./libs/msidb-d"},
+		"asdf": "~>0.7.17"
+	},
+	"configurations": [
+		{
+			"name": "executable",
+			"targetType": "executable",
+			"mainSourceFile": "source/app.d"
+		},
+		{
+			"name": "library",
+			"targetType": "library",
+			"excludedSourceFiles": ["source/app.d"]
+		}
+	]
 }

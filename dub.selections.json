@@ -2,8 +2,12 @@
 	"fileVersion": 1,
 	"versions": {
 		"arsd-official": "11.0.1",
+		"asdf": "0.7.17",
 		"cab-d": {"path":"libs/cab-d"},
 		"cfb-d": {"path":"libs/cfb-d"},
-		"msidb-d": {"path":"libs/msidb-d"}
+		"mir-algorithm": "3.22.4",
+		"mir-core": "1.7.3",
+		"msidb-d": {"path":"libs/msidb-d"},
+		"silly": "1.1.1"
 	}
 }

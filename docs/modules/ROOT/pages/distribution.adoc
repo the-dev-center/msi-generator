@@ -1,0 +1,68 @@
+= Distribution and Integration
+
+The `msi-generator` is designed for high portability and easy integration into existing native build pipelines.
+
+== Standalone CLI
+
+The primary distribution format is a statically linked CLI binary. This ensures that the tool can run on any CI/CD environment without installing the D runtime or a compiler.
+
+=== Platforms
+- **Windows**: `x86_64-pc-windows-msvc`
+- **Linux**: `x86_64-unknown-linux-gnu`
+- **macOS**: `x86_64-apple-darwin`
+
+== JSON Specification (`msi.json`)
+
+To decouple the build logic from the tool, we use a JSON specification.
+
+[source,json]
+----
+{
+  "name": "MyProject",
+  "manufacturer": "DevCenter",
+  "productVersion": "1.0.0.0",
+  "productCode": "...",
+  "upgradeCode": "...",
+  "rootFolder": {
+    "id": "INSTALLDIR",
+    "name": "My App"
+  }
+}
+----
+
+The JSON schema is available at `schema/msi-spec.schema.json`.
+
+== Integrations
+
+=== CMake / CPack
+A CMake module is provided in `cmake/MSIGenerator.cmake`. To use it:
+
+[source,cmake]
+----
+include(cmake/MSIGenerator.cmake)
+if(CPACK_MSI_GENERATOR_FOUND)
+    cpack_msi_generator_generate_spec()
+endif()
+----
+
+=== GitHub Actions
+Use the official action to generate installers in your CI:
+
+[source,yaml]
+----
+- uses: the-dev-center/msi-generator@main
+  with:
+    spec: 'msi.json'
+    output: 'myapp.msi'
+----
+
+== Library Usage (DUB)
+
+Add `msi-generator` as a dependency in your `dub.json`:
+
+[source,json]
+----
+"dependencies": {
+    "msi-generator": "~>1.0.0"
+}
+----
