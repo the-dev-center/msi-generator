@@ -1,8 +1,10 @@
 {
-	"description": "A minimal D application.",
-	"authors": [
-		"rjamd"
-	],
-	"license": "proprietary",
-	"name": "msi-generator"
+	"name": "msi-generator",
+	"description": "Cross-platform MSI and MSIX package generator in pure D.",
+	"authors": ["The Dev Center"],
+	"license": "MIT",
+	"targetType": "executable",
+	"dependencies": {
+		"arsd-official:dom": "~>11.0.0"
+	}
 }

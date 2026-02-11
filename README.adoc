@@ -3,3 +3,28 @@
 
 This project aim to replace WiX in CPack (CMake) by providing a pure D implementation for generating Windows Installer (MSI) and MSIX packages without depending on Windows-only binaries.
 
+== Quick Start
+
+=== Prerequisites
+- D compiler (DMD, LDC, or GDC)
+- dub (D package manager)
+
+=== Build
+[source,bash]
+----
+dub build
+----
+
+=== Usage
+[source,bash]
+----
+./msi-generator --name="MyApp" --id="com.example.myapp" --version="1.0.0.0" --exe="bin/myapp.exe" --output="myapp.msix"
+----
+
+== Antora Documentation
+
+Documentation is located in the `docs` folder. To build the documentation:
+[source,bash]
+----
+npx antora docs/antora-playbook.yml
+----
