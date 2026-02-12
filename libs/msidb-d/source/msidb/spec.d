@@ -11,8 +11,13 @@ struct ProductSpec {
     string name;
     string manufacturer;
     string productVersion;
-    UUID productCode; // Used for MSI ProductCode
-    UUID upgradeCode; // Used for MSI UpgradeCode
+    version(UseStringUUIDs) {
+        string productCode; // Used for MSI ProductCode
+        string upgradeCode; // Used for MSI UpgradeCode
+    } else {
+        UUID productCode; // Used for MSI ProductCode
+        UUID upgradeCode; // Used for MSI UpgradeCode
+    }
     
     FolderSpec rootFolder;
     ComponentSpec[] components;
@@ -43,7 +48,11 @@ struct RegistrySpec {
 
 struct ComponentSpec {
     string id;
-    UUID guid;
+    version(UseStringUUIDs) {
+        string guid;
+    } else {
+        UUID guid;
+    }
     string directoryId;
     FileSpec[] files;
     RegistrySpec[] registryEntries;

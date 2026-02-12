@@ -1,0 +1,29 @@
+{
+  "name": "TestApp",
+  "manufacturer": "TestCorp",
+  "productVersion": "1.0.0.0",
+  "productCode": "12345678-1234-1234-1234-123456789012",
+  "upgradeCode": "87654321-4321-4321-4321-210987654321",
+  "rootFolder": {
+    "id": "TARGETDIR",
+    "name": "SourceDir",
+    "parentId": "",
+    "subfolders": []
+  },
+  "components": [
+      {
+          "id": "MainComponent",
+          "guid": "12345678-1234-1234-1234-123456789013",
+          "directoryId": "TARGETDIR",
+          "files": [
+              {
+                  "id": "MainExe",
+                  "sourcePath": "msi-generator.exe",
+                  "targetName": "TestApp.exe"
+              }
+          ],
+          "registryEntries": []
+      }
+  ],
+  "features": []
+}

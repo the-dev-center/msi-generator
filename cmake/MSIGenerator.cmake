@@ -1,5 +1,7 @@
 # CPack MSIGenerator Plugin Wrapper
 # This module allows CPack to use the msi-generator tool.
+# NOTE: This script is currently incomplete and will generate invalid JSON. 
+#       See msi-generator documentation for required fields (productCode, upgradeCode).
 
 if(NOT CPACK_MSI_GENERATOR_EXECUTABLE)
     find_program(CPACK_MSI_GENERATOR_EXECUTABLE msi-generator)

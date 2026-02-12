@@ -35,7 +35,14 @@ void main(string[] args) {
 
     if (specPath !is null) {
         auto specText = readText(specPath);
-        auto productSpec = specText.deserialize!ProductSpec;
+        ProductSpec productSpec;
+        try {
+            productSpec = specText.deserialize!ProductSpec;
+        } catch (Exception e) {
+            writeln("Error parsing spec: ", e.msg);
+            writeln("Spec content: ", specText);
+            return;
+        }
         
         if (type == "msi") {
             auto db = new MsiDatabase(productSpec);
@@ -45,9 +52,30 @@ void main(string[] args) {
             pinfo.name = productSpec.name;
             pinfo.pkgVersion = productSpec.productVersion;
             pinfo.publisher = productSpec.manufacturer;
+            
+            import std.conv : to;
+            pinfo.id = productSpec.productCode.to!string;
+            
+            // Find executable path from components
+            import std.algorithm : endsWith;
+            foreach (comp; productSpec.components) {
+                foreach (file; comp.files) {
+                    if (file.sourcePath.endsWith(".exe")) {
+                        pinfo.executablePath = file.sourcePath;
+                        break;
+                    }
+                }
+                if (pinfo.executablePath.length > 0) break;
+            }
+
+            if (pinfo.executablePath.length == 0) {
+                writeln("Warning: No executable found in spec components. MSIX might be invalid.");
+            }
+
             auto gen = new MsixGenerator();
             gen.generate(pinfo, output);
         }
+        writeln("Generated ", type, " package at ", output);
         return;
     }
 

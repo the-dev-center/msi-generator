@@ -21,12 +21,16 @@ To decouple the build logic from the tool, we use a JSON specification.
   "name": "MyProject",
   "manufacturer": "DevCenter",
   "productVersion": "1.0.0.0",
-  "productCode": "...",
-  "upgradeCode": "...",
+  "productCode": "00000000-0000-0000-0000-000000000000",
+  "upgradeCode": "00000000-0000-0000-0000-000000000001",
   "rootFolder": {
     "id": "INSTALLDIR",
-    "name": "My App"
-  }
+    "name": "My App",
+    "parentId": "",
+    "subfolders": []
+  },
+  "components": [],
+  "features": []
 }
 ----
 
@@ -35,6 +39,8 @@ The JSON schema is available at `schema/msi-spec.schema.json`.
 == Integrations
 
 === CMake / CPack
+WARNING: The CMake integration is currently experimental and incomplete. It does not yet generate valid JSON with required UUID fields.
+
 A CMake module is provided in `cmake/MSIGenerator.cmake`. To use it:
 
 [source,cmake]

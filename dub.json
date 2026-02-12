@@ -20,6 +20,12 @@
 			"name": "library",
 			"targetType": "library",
 			"excludedSourceFiles": ["source/app.d"]
+		},
+		{
+			"name": "prod",
+			"targetType": "executable",
+			"versions": ["UseStringUUIDs"],
+			"mainSourceFile": "source/app.d"
 		}
 	]
 }
