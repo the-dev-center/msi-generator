@@ -29,7 +29,7 @@ jobs:
         # By default antora-playbook points to HEAD for local builds,
         # but in CI we want to use the current checkout.
         # We'll use a modified playbook or override the url to '.'
-        run: antora docs/antora-playbook.yml --to-dir public
+        run: antora docs/antora-playbook.yml --to-dir public --url .
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
