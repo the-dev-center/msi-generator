@@ -2,8 +2,8 @@ site:
   title: MSI/MSIX Generator
 content:
   sources:
-    - url: .
-      branches: [main]
+    - url: ./
+      branches: [HEAD]
       start_path: docs
 ui:
   bundle:
