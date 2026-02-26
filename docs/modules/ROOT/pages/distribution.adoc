@@ -56,7 +56,7 @@ Use the official action to generate installers in your CI:
 
 [source,yaml]
 ----
-- uses: the-dev-center/msi-generator@main
+- uses: devcntr-app/msi-generator@main
   with:
     spec: 'msi.json'
     output: 'myapp.msi'
@@ -72,3 +72,4 @@ Add `msi-generator` as a dependency in your `dub.json`:
     "msi-generator": "~>1.0.0"
 }
 ----
+
